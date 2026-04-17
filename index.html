@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل طالب - أكاديمية Full Mark</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="login-overlay" class="login-overlay">
+    <div class="login-card">
+      <h2>تسجيل الدخول</h2>
+      <p>يرجى إدخال اسم المستخدم وكلمة المرور للدخول إلى النظام.</p>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">اسم المستخدم</label>
+          <input type="text" id="login-username" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">كلمة المرور</label>
+          <input type="password" id="login-password" required />
+        </div>
+        <button type="submit">دخول</button>
+        <div id="login-error" class="error-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="page-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="Logo.png.jpeg" alt="Full Mark Academy Logo">
+        </div>
+        <div class="brand-text">
+          <span class="brand-pretitle">أكاديمية</span>
+          <h1>Full Mark</h1>
+        </div>
+      </div>
+      <p class="brand-subtitle">More than just success</p>
+      <button type="button" id="logout-button" class="logout-button" style="display:none;">تسجيل خروج</button>
+    </div>
+
+    <div class="main-content">
+      <div class="left-panel">
+        <div class="panel-title">البيانات المسجلة</div>
+        <div class="search-bar">
+          <input type="search" id="search-input" placeholder="ابحث بالاسم أو رقم الهاتف أو كود الطالب" />
+        </div>
+        <div class="records-section">
+          <div id="records-empty" class="empty-message">لا يوجد بيانات مسجلة حتى الآن.</div>
+          <div id="records-list"></div>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="panel-title">تسجيل جديد</div>
+        <form id="registration-form">
+          <input type="hidden" id="editing-id" name="editingId" />
+          <div class="form-group">
+            <label for="student-name">اسم الطالب بالكامل</label>
+            <input type="text" id="student-name" name="studentName" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="student-code">كود الطالب</label>
+              <div class="code-input-wrapper">
+                <input type="text" id="student-code" name="studentCode" readonly required />
+                <button type="button" id="generate-code" class="small-button">توليد</button>
+              </div>
+            </div>
+            <div class="form-group half">
+              <label for="phone-number">رقم الموبايل الأساسي</label>
+              <input type="tel" id="phone-number" name="phoneNumber" placeholder="01012345678" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guardian-number">رقم موبايل ولى الأمر</label>
+            <input type="tel" id="guardian-number" name="guardianNumber" placeholder="01012345678" required />
+          </div>
+
+          <div class="form-group">
+            <label for="address">العنوان</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="class-grade">الصف الدراسي</label>
+              <select id="class-grade" name="classGrade" required>
+                <option value="">اختر الصف الدراسي</option>
+                <option value="1 ابتدائي">1 ابتدائي</option>
+                <option value="2 ابتدائي">2 ابتدائي</option>
+                <option value="3 ابتدائي">3 ابتدائي</option>
+                <option value="4 ابتدائي">4 ابتدائي</option>
+                <option value="5 ابتدائي">5 ابتدائي</option>
+                <option value="6 ابتدائي">6 ابتدائي</option>
+                <option value="1 اعدادي">1 اعدادي</option>
+                <option value="2 اعدادي">2 اعدادي</option>
+                <option value="3 اعدادي">3 اعدادي</option>
+                <option value="1 ثانوي">1 ثانوي</option>
+                <option value="2 ثانوي">2 ثانوي</option>
+                <option value="3 ثانوي">3 ثانوي</option>
+              </select>
+            </div>
+            <div class="form-group half">
+              <label for="registration-date">التاريخ</label>
+              <input type="date" id="registration-date" name="registrationDate" required />
+              <p id="day-name" class="day-name">-</p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="teacher-name">اسم المدرس</label>
+              <input type="text" id="teacher-name" name="teacherName" />
+            </div>
+            <div class="form-group half">
+              <label for="room-number">رقم القاعة</label>
+              <input type="text" id="room-number" name="roomNumber" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="lesson-price">سعر الحصة</label>
+              <input type="number" id="lesson-price" name="lessonPrice" min="0" step="0.01" required />
+            </div>
+            <div class="form-group half">
+              <label for="remaining-price">المبلغ المتبقي لسعر الحصة</label>
+              <input type="number" id="remaining-price" name="remainingPrice" min="0" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="book-price">سعر الكتاب</label>
+              <input type="number" id="book-price" name="bookPrice" min="0" step="0.01" required />
+            </div>
+            <div class="form-group half">
+              <label for="presence">الحضور</label>
+              <select id="presence" name="presence" required>
+                <option value="">اختر الحالة</option>
+                <option value="حاضر">حاضر</option>
+                <option value="غائب">غائب</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>المواد التي يدرسها</label>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="subjects" value="عربى" /> عربى</label>
+              <label><input type="checkbox" name="subjects" value="رياضة" /> رياضة</label>
+              <label><input type="checkbox" name="subjects" value="انجليزي" /> انجليزي</label>
+              <label><input type="checkbox" name="subjects" value="علوم" /> علوم</label>
+              <label><input type="checkbox" name="subjects" value="دراسات" /> دراسات</label>
+              <label><input type="checkbox" name="subjects" value="تاريخ" /> تاريخ</label>
+              <label><input type="checkbox" name="subjects" value="جغرافيا" /> جغرافيا</label>
+              <label><input type="checkbox" name="subjects" value="فيزياء" /> فيزياء</label>
+              <label><input type="checkbox" name="subjects" value="كيمياء" /> كيمياء</label>
+              <label><input type="checkbox" name="subjects" value="يوسي ماث" /> يوسي ماث</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="photo">رفع صورة شخصية</label>
+            <input type="file" id="photo" accept="image/*" />
+            <div class="preview-box">
+              <img id="photo-preview" alt="معاينة الصورة" />
+              <p id="preview-text">لم يتم اختيار صورة بعد</p>
+            </div>
+          </div>
+
+          <button type="submit">حفظ التسجيل</button>
+          <button type="button" id="cancel-edit" class="secondary-button" style="display:none;">إلغاء التعديل</button>
+        </form>
+        <div id="result" class="result-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="record-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <button type="button" id="modal-close" class="modal-close">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
